@@ -19,6 +19,9 @@ services:
     volumes:
       - /root/llm/all-MiniLM-L6-v2:/app/models/all-MiniLM-L6-v2
       - /root/llm/ms-marco-MiniLM-L6-v2:/app/models/ms-marco-MiniLM-L6-v2
+      - /root/my_rag/.venv:/app/.venv
+      # 3. 映射项目代码（可选，方便改代码不用重建镜像）
+      - /root/my_rag:/app
     ports:
       - "5000:5000"
     depends_on:

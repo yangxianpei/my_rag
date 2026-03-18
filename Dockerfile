@@ -1,22 +1,11 @@
-# 使用轻量 Python 镜像
-FROM python
+# 使用轻量 Python 镜像（建议指定版本，和宿主机一致，比如 3.13-slim）
+FROM python:3.13-slim
 
 WORKDIR /app
 
-# 先复制依赖文件，利用缓存
-COPY pyproject.toml uv.lock* /app/
-
-# 安装 uv
-RUN pip install --no-cache-dir uv
-
-# 安装依赖
-RUN uv sync --frozen --index-url https://mirrors.aliyun.com/pypi/simple/
-
-# 再复制代码
+# 仅复制项目代码（不安装任何依赖、不装 uv）
 COPY . /app
 
-# 设置默认环境变量为 dev，可在启动时覆盖
-ENV ENV=dev
-
-# 使用 uvicorn 运行
-CMD ["uv", "run", "main.py"]
+# 【核心】直接调用宿主机映射过来的 .venv 里的 uv 启动
+# 路径必须和 docker-compose.yml 中映射的 .venv 一致：/app/.venv
+CMD ["/app/.venv/bin/uv", "run", "main.py"]
