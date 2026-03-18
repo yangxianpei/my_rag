@@ -1,5 +1,5 @@
 # 使用轻量 Python 镜像（建议指定版本，和宿主机一致，比如 3.13-slim）
-FROM python:3.13-slim
+FROM python:3.13
 
 WORKDIR /app
 
