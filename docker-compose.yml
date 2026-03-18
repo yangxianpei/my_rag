@@ -21,7 +21,7 @@ services:
     volumes:
       - /root/llm/all-MiniLM-L6-v2:/all-MiniLM-L6-v2 
       - /root/llm/ms-marco-MiniLM-L6-v2:/ms-marco-MiniLM-L6-v2
-      - ./root/my_rag:/app  
+      - /root/my_rag:/app  
     ports:
       - "8000:8000"
     depends_on:
