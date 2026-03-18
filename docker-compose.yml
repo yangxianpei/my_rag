@@ -17,7 +17,7 @@ services:
     container_name: rag-app
     restart: always
     env_file:
-      - ./app/env.prod
+      - ./env.prod
     volumes:
       - /root/llm/all-MiniLM-L6-v2:/all-MiniLM-L6-v2 
       - /root/llm/ms-marco-MiniLM-L6-v2:/ms-marco-MiniLM-L6-v2
