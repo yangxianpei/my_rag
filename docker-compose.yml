@@ -1,5 +1,3 @@
-version: "3.9"
-
 services:
   mysql:
     image: mysql:8.0
@@ -19,10 +17,11 @@ services:
     container_name: rag-app
     restart: always
     env_file:
-      - ./env.prod 
+      - ./env.prod
     volumes:
       - /root/llm/all-MiniLM-L6-v2:/all-MiniLM-L6-v2   # 映射模型路径
       - /root/llm/ms-marco-MiniLM-L6-v2:/ms-marco-MiniLM-L6-v2
+      - ./root/my_rag:/app  
     ports:
       - "8000:8000"
     depends_on:
