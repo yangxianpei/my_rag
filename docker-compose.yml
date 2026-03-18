@@ -8,7 +8,7 @@ services:
     ports:
       - "3306:3306"
     volumes:
-      - rag_data:/var/lib/mysql
+      - rag_data:/var/lib/mysql #qwq
 
   app:
     build: .
