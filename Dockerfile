@@ -11,7 +11,7 @@ COPY pyproject.toml uv.lock* ./
 
 # 4. 同步依赖（如果你不需要 GPU，这里一定要加 --extra-index-url）
 # 这步如果也慢，是因为在下载 torch 等大包，阿里云镜像会快很多
-RUN uv sync --frozen \
+RUN uv sync  \
     --index-url https://mirrors.aliyun.com/pypi/simple/ \
     --extra-index-url https://download.pytorch.org/whl/cpu
 
