@@ -21,7 +21,7 @@ class SettingsService(BaseService[Settings]):
         # 返回包含所有默认字段值的字典
         return {
             "embedding_provider": "huggingface",  # 默认 embedding provider
-            "embedding_model_name": "C:/Users/yxp/Desktop/rag_code-master/rag_code-master/5.rag-lite/all-MiniLM-L6-v2",  # 默认 embedding 模型
+            "embedding_model_name": Config.EMBEDDING_MODEL_NAMME,  # 默认 embedding 模型
             "embedding_api_key": "embedding_api_key",  # 默认无 embedding API key
             "embedding_base_url": "embedding_base_url",  # 默认无 embedding base url
             "llm_provider": "deepseek",  # 默认 LLM provider

@@ -1,8 +1,9 @@
 from app.utils.logger import get_logger
 from sentence_transformers import CrossEncoder
 from langchain_core.documents import Document
+from app.config import Config
 
-RERANK_MODEL_NAME = "C:/Users/yxp/Desktop/rag_code-master/rag_code-master/5.rag-lite/ms-marco-MiniLM-L6-v2"
+RERANK_MODEL_NAME = Config.RERANK_MODEL_NAME
 logger = get_logger(__name__)
 
 
