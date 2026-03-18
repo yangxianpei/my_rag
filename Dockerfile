@@ -10,7 +10,7 @@ RUN pip install --no-cache-dir uv
 
 RUN uv sync --frozen --index-url https://mirrors.aliyun.com/pypi/simple/
 
-# 4️⃣ 再复制代码
+# 4️⃣ 再复制代码 !
 COPY . /app
 
 
