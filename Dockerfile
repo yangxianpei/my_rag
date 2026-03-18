@@ -2,10 +2,10 @@ FROM python:3.13-slim
 
 WORKDIR /app
 
-# 1. 核心大招：先用 pip 把 CPU 版 torch 系列装好
-# 这一步会下载大约 150MB-200MB，绝对不会带出 nvidia 包
+# 换成清华大学的 PyTorch CPU 镜像源
 RUN pip install torch torchvision torchaudio \
-    --index-url https://download.pytorch.org/whl/cpu \
+    --index-url https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/pytorch/linux-64/ \
+    --extra-index-url https://mirrors.aliyun.com/pypi/simple/ \
     --no-cache-dir
 
 # 2. 复制你的配置文件
