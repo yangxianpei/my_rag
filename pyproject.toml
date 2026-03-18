@@ -26,3 +26,14 @@ dependencies = [
     "sqlalchemy>=2.0.45",
     "urllib3<2",
 ]
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true  # 只有明确指定时才使用这个源
+
+[tool.uv.sources]
+# 核心配置：强制 torch 及其相关包从 CPU 源下载
+torch = { index = "pytorch-cpu" }
+torchvision = { index = "pytorch-cpu" }
+torchaudio = { index = "pytorch-cpu" }
