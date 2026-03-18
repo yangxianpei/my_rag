@@ -9431,3 +9431,23 @@ TypeError: 'NoneType' object is not subscriptable
 2026-03-18 12:27:37,789 - __main__ - INFO - main.py:11 - 正在启动RAG服务器在0.0.0.0:5001
 2026-03-18 12:27:37,804 - werkzeug - WARNING - _internal.py:97 -  * Debugger is active!
 2026-03-18 12:27:37,857 - werkzeug - INFO - _internal.py:97 -  * Debugger PIN: 689-390-677
+2026-03-18 12:36:14,122 - __main__ - INFO - main.py:9 - 正在启动项目
+2026-03-18 12:36:14,123 - app - INFO - __init__.py:18 - 初始化数据库...
+2026-03-18 12:36:14,165 - app - INFO - __init__.py:20 - 初始化数据库成功
+2026-03-18 12:36:14,178 - app.services.storage.local_storage - INFO - local_storage.py:16 - 本地存储初始化成功：目录：C:\Users\yxp\Desktop\myRag\storages
+2026-03-18 12:36:30,718 - app.services.vctordb.chroma - INFO - chroma.py:14 - ChromaDB已经初始化，持久化目录为:./chroma_db
+2026-03-18 12:36:36,416 - app.utils.llm_factory - INFO - llm_factory.py:15 - 已经注册了LLM提供商:deepseek
+2026-03-18 12:36:36,416 - app.utils.llm_factory - INFO - llm_factory.py:15 - 已经注册了LLM提供商:openai
+2026-03-18 12:36:36,416 - app.utils.llm_factory - INFO - llm_factory.py:15 - 已经注册了LLM提供商:ollama
+2026-03-18 12:36:36,646 - sentence_transformers.cross_encoder.CrossEncoder - INFO - CrossEncoder.py:228 - Use pytorch device: cpu
+2026-03-18 12:36:36,660 - __main__ - INFO - main.py:11 - 正在启动RAG服务器在0.0.0.0:5001
+2026-03-18 12:36:36,689 - werkzeug - INFO - _internal.py:97 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.1.104:5001
+2026-03-18 12:36:36,689 - werkzeug - INFO - _internal.py:97 - [33mPress CTRL+C to quit[0m
+2026-03-18 12:36:36,693 - werkzeug - INFO - _internal.py:97 -  * Restarting with stat
+2026-03-18 12:36:37,727 - __main__ - INFO - main.py:9 - 正在启动项目
+2026-03-18 12:36:37,728 - app - INFO - __init__.py:18 - 初始化数据库...
+2026-03-18 12:36:37,764 - app - INFO - __init__.py:20 - 初始化数据库成功
+2026-03-18 12:36:37,777 - app.services.storage.local_storage - INFO - local_storage.py:16 - 本地存储初始化成功：目录：C:\Users\yxp\Desktop\myRag\storages
