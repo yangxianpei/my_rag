@@ -30,10 +30,9 @@ dependencies = [
 [[tool.uv.index]]
 name = "pytorch-cpu"
 url = "https://download.pytorch.org/whl/cpu"
-explicit = true  # 只有明确指定时才使用这个源
+explicit = true  # 👈 关键：这行表示“除非我指定，否则别去这个源找东西”
 
 [tool.uv.sources]
-# 核心配置：强制 torch 及其相关包从 CPU 源下载
+# 👈 只有这两个大块头去专门的 CPU 源找，其他库一律走默认镜像
 torch = { index = "pytorch-cpu" }
 torchvision = { index = "pytorch-cpu" }
-torchaudio = { index = "pytorch-cpu" }

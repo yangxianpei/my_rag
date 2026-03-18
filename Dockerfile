@@ -2,23 +2,17 @@ FROM python:3.13-slim
 
 WORKDIR /app
 
-# 1️⃣ 安装 uv（继续用国内镜像，快）
+# 1. 安装 uv
 RUN pip install uv -i https://mirrors.aliyun.com/pypi/simple/
 
-# 2️⃣ 复制依赖文件
+# 2. 复制依赖文件
 COPY pyproject.toml uv.lock* ./
 
-# 3️⃣ 关键：添加 --index-strategy 参数解决版本冲突
-# 这会强制 uv 在所有源里寻找最合适的 requests 等基础库版本
-RUN uv sync \
-    --index-url https://mirrors.aliyun.com/pypi/simple/ \
-    --extra-index-url https://download.pytorch.org/whl/cpu \
-    --index-strategy unsafe-best-match
+# 3. 极简同步：不再需要命令行传多个 index，uv 会自动看 pyproject.toml
+# 我们手动指定一个主镜像源即可
+RUN uv sync --index-url https://mirrors.aliyun.com/pypi/simple/
 
-# 4️⃣ 复制代码
+# 4. 复制剩余代码
 COPY . .
-
-# 告诉项目在运行时也别去找显卡
-ENV CUDA_VISIBLE_DEVICES=""
 
 CMD ["uv", "run", "main.py"]
