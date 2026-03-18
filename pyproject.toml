@@ -27,15 +27,18 @@ dependencies = [
     "urllib3<2",
 ]
 
+[tool.uv]
+# 重点：防止依赖冲突，确保解析最匹配的版本
+index-strategy = "unsafe-best-match"
+
+[tool.uv.sources]
+# 强制 Linux 环境下所有 AI 核心库都去 CPU 源，绕过 NVIDIA 
+torch = { index = "pytorch-cpu", marker = "sys_platform == 'linux'" }
+# 增加这两行是解决 sentence-transformers 偷偷下载大包的关键
+nvidia-cudnn-cu12 = { index = "pytorch-cpu", marker = "sys_platform == 'linux'" }
+nvidia-cublas-cu12 = { index = "pytorch-cpu", marker = "sys_platform == 'linux'" }
+
 [[tool.uv.index]]
 name = "pytorch-cpu"
 url = "https://download.pytorch.org/whl/cpu"
-explicit = true
-
-[tool.uv.sources]
-# 👈 把所有“重型”AI 库及其底层驱动全部锁死在 CPU 源
-torch = { index = "pytorch-cpu" }
-torchvision = { index = "pytorch-cpu" }
-# 如果还有下载，把下面这些也加上（它们是主要的 NVIDIA 依赖来源）
-nvidia-cudnn-cu12 = { index = "pytorch-cpu" }
-nvidia-cublas-cu12 = { index = "pytorch-cpu" }
+explicit = true  # 只有上面的 sources 指定时才去这个源
