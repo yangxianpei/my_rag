@@ -4,6 +4,7 @@
 模型配置
 定义可用的 Embedding 模型和 LLM 模型列表
 """
+from app.config import Config
 
 # 定义向量嵌入模型（Embedding Models）的配置字典
 EMBEDDING_MODELS = {
@@ -20,7 +21,7 @@ EMBEDDING_MODELS = {
                 # 模型名称
                 "name": "sentence-transformers/all-MiniLM-L6-v2",
                 # 模型路径
-                "path": "C:/Users/yxp/Desktop/rag_code-master/rag_code-master/5.rag-lite/all-MiniLM-L6-v2",
+                "path": Config.EMBEDDING_MODEL_NAMME,
                 # 向量维度
                 "dimension": "384",
                 # 描述

@@ -59,3 +59,13 @@ class Config:
 
     # 指定向量数据库的类型
     VECTOR_DB_TYPE = os.environ.get("VECTOR_DB_TYPE", "chroma")  # chroma 或 milvus
+    # embedding_model_name
+    EMBEDDING_MODEL_NAMME = os.environ.get(
+        "EMBEDDING_MODEL_NAMME",
+        "C:/Users/yxp/Desktop/rag_code-master/rag_code-master/5.rag-lite/all-MiniLM-L6-v2",
+    )  # chroma 或 milvus
+    # RERANK_MODEL_NAME
+    RERANK_MODEL_NAME = os.environ.get(
+        "RERANK_MODEL_NAME",
+        "C:/Users/yxp/Desktop/rag_code-master/rag_code-master/5.rag-lite/ms-marco-MiniLM-L6-v2",
+    )

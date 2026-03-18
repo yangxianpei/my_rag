@@ -20,6 +20,7 @@ from app.services.settings_service import settings_service
 
 bp = Blueprint("settings", __name__)
 from app.utils.logger import get_logger
+from app.config import Config
 
 logger = get_logger(__name__)
 

@@ -9360,3 +9360,66 @@ TypeError: 'NoneType' object is not subscriptable
 2026-03-18 11:31:18,363 - __main__ - INFO - main.py:11 - 正在启动RAG服务器在0.0.0.0:5001
 2026-03-18 11:31:18,379 - werkzeug - WARNING - _internal.py:97 -  * Debugger is active!
 2026-03-18 11:31:18,418 - werkzeug - INFO - _internal.py:97 -  * Debugger PIN: 102-205-419
+2026-03-18 12:23:20,441 - __main__ - INFO - main.py:9 - 正在启动项目
+2026-03-18 12:23:20,442 - app - INFO - __init__.py:18 - 初始化数据库...
+2026-03-18 12:23:20,624 - app - INFO - __init__.py:20 - 初始化数据库成功
+2026-03-18 12:23:20,640 - app.services.storage.local_storage - INFO - local_storage.py:16 - 本地存储初始化成功：目录：C:\Users\yxp\Desktop\myRag\storages
+2026-03-18 12:23:43,603 - app.services.vctordb.chroma - INFO - chroma.py:14 - ChromaDB已经初始化，持久化目录为:./chroma_db
+2026-03-18 12:23:51,032 - app.utils.llm_factory - INFO - llm_factory.py:15 - 已经注册了LLM提供商:deepseek
+2026-03-18 12:23:51,033 - app.utils.llm_factory - INFO - llm_factory.py:15 - 已经注册了LLM提供商:openai
+2026-03-18 12:23:51,033 - app.utils.llm_factory - INFO - llm_factory.py:15 - 已经注册了LLM提供商:ollama
+2026-03-18 12:23:51,332 - sentence_transformers.cross_encoder.CrossEncoder - INFO - CrossEncoder.py:228 - Use pytorch device: cpu
+2026-03-18 12:23:51,354 - __main__ - INFO - main.py:11 - 正在启动RAG服务器在0.0.0.0:5001
+2026-03-18 12:23:51,405 - werkzeug - INFO - _internal.py:97 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.1.104:5001
+2026-03-18 12:23:51,405 - werkzeug - INFO - _internal.py:97 - [33mPress CTRL+C to quit[0m
+2026-03-18 12:23:51,410 - werkzeug - INFO - _internal.py:97 -  * Restarting with stat
+2026-03-18 12:23:52,549 - __main__ - INFO - main.py:9 - 正在启动项目
+2026-03-18 12:23:52,549 - app - INFO - __init__.py:18 - 初始化数据库...
+2026-03-18 12:23:52,595 - app - INFO - __init__.py:20 - 初始化数据库成功
+2026-03-18 12:23:52,607 - app.services.storage.local_storage - INFO - local_storage.py:16 - 本地存储初始化成功：目录：C:\Users\yxp\Desktop\myRag\storages
+2026-03-18 12:24:09,415 - app.services.vctordb.chroma - INFO - chroma.py:14 - ChromaDB已经初始化，持久化目录为:./chroma_db
+2026-03-18 12:24:15,413 - app.utils.llm_factory - INFO - llm_factory.py:15 - 已经注册了LLM提供商:deepseek
+2026-03-18 12:24:15,413 - app.utils.llm_factory - INFO - llm_factory.py:15 - 已经注册了LLM提供商:openai
+2026-03-18 12:24:15,413 - app.utils.llm_factory - INFO - llm_factory.py:15 - 已经注册了LLM提供商:ollama
+2026-03-18 12:24:15,669 - sentence_transformers.cross_encoder.CrossEncoder - INFO - CrossEncoder.py:228 - Use pytorch device: cpu
+2026-03-18 12:24:15,685 - __main__ - INFO - main.py:11 - 正在启动RAG服务器在0.0.0.0:5001
+2026-03-18 12:24:15,702 - werkzeug - WARNING - _internal.py:97 -  * Debugger is active!
+2026-03-18 12:24:15,746 - werkzeug - INFO - _internal.py:97 -  * Debugger PIN: 689-390-677
+2026-03-18 12:24:41,558 - werkzeug - INFO - _internal.py:97 -  * Detected change in 'C:\\Users\\yxp\\Desktop\\myRag\\app\\utils\\models_config.py', reloading
+2026-03-18 12:24:42,799 - werkzeug - INFO - _internal.py:97 -  * Restarting with stat
+2026-03-18 12:24:43,946 - __main__ - INFO - main.py:9 - 正在启动项目
+2026-03-18 12:24:43,947 - app - INFO - __init__.py:18 - 初始化数据库...
+2026-03-18 12:24:43,989 - app - INFO - __init__.py:20 - 初始化数据库成功
+2026-03-18 12:24:44,003 - app.services.storage.local_storage - INFO - local_storage.py:16 - 本地存储初始化成功：目录：C:\Users\yxp\Desktop\myRag\storages
+2026-03-18 12:24:53,801 - __main__ - INFO - main.py:9 - 正在启动项目
+2026-03-18 12:24:53,801 - app - INFO - __init__.py:18 - 初始化数据库...
+2026-03-18 12:24:53,845 - app - INFO - __init__.py:20 - 初始化数据库成功
+2026-03-18 12:24:53,858 - app.services.storage.local_storage - INFO - local_storage.py:16 - 本地存储初始化成功：目录：C:\Users\yxp\Desktop\myRag\storages
+2026-03-18 12:25:10,366 - app.services.vctordb.chroma - INFO - chroma.py:14 - ChromaDB已经初始化，持久化目录为:./chroma_db
+2026-03-18 12:25:16,173 - app.utils.llm_factory - INFO - llm_factory.py:15 - 已经注册了LLM提供商:deepseek
+2026-03-18 12:25:16,173 - app.utils.llm_factory - INFO - llm_factory.py:15 - 已经注册了LLM提供商:openai
+2026-03-18 12:25:16,173 - app.utils.llm_factory - INFO - llm_factory.py:15 - 已经注册了LLM提供商:ollama
+2026-03-18 12:25:16,407 - sentence_transformers.cross_encoder.CrossEncoder - INFO - CrossEncoder.py:228 - Use pytorch device: cpu
+2026-03-18 12:26:47,582 - __main__ - INFO - main.py:9 - 正在启动项目
+2026-03-18 12:26:47,583 - app - INFO - __init__.py:18 - 初始化数据库...
+2026-03-18 12:26:47,633 - app - INFO - __init__.py:20 - 初始化数据库成功
+2026-03-18 12:26:47,646 - app.services.storage.local_storage - INFO - local_storage.py:16 - 本地存储初始化成功：目录：C:\Users\yxp\Desktop\myRag\storages
+2026-03-18 12:27:05,752 - app.services.vctordb.chroma - INFO - chroma.py:14 - ChromaDB已经初始化，持久化目录为:./chroma_db
+2026-03-18 12:27:12,270 - app.utils.llm_factory - INFO - llm_factory.py:15 - 已经注册了LLM提供商:deepseek
+2026-03-18 12:27:12,271 - app.utils.llm_factory - INFO - llm_factory.py:15 - 已经注册了LLM提供商:openai
+2026-03-18 12:27:12,271 - app.utils.llm_factory - INFO - llm_factory.py:15 - 已经注册了LLM提供商:ollama
+2026-03-18 12:27:12,648 - sentence_transformers.cross_encoder.CrossEncoder - INFO - CrossEncoder.py:228 - Use pytorch device: cpu
+2026-03-18 12:27:12,669 - __main__ - INFO - main.py:11 - 正在启动RAG服务器在0.0.0.0:5001
+2026-03-18 12:27:12,708 - werkzeug - INFO - _internal.py:97 - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5001
+ * Running on http://192.168.1.104:5001
+2026-03-18 12:27:12,709 - werkzeug - INFO - _internal.py:97 - [33mPress CTRL+C to quit[0m
+2026-03-18 12:27:12,713 - werkzeug - INFO - _internal.py:97 -  * Restarting with stat
+2026-03-18 12:27:13,809 - __main__ - INFO - main.py:9 - 正在启动项目
+2026-03-18 12:27:13,810 - app - INFO - __init__.py:18 - 初始化数据库...
+2026-03-18 12:27:13,845 - app - INFO - __init__.py:20 - 初始化数据库成功
+2026-03-18 12:27:13,858 - app.services.storage.local_storage - INFO - local_storage.py:16 - 本地存储初始化成功：目录：C:\Users\yxp\Desktop\myRag\storages
