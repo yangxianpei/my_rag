@@ -11,3 +11,4 @@ wheels/
 
 storages
 chroma_db
+logs/
