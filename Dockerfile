@@ -2,22 +2,22 @@ FROM python:3.13-slim
 
 WORKDIR /app
 
-# --- 关键：先安装 uv 本身 ---
-RUN pip install uv -i https://mirrors.aliyun.com/pypi/simple/
-
-# 1. 先强行安装 CPU 版 torch 系列，占领坑位
-# 注意：加上 --system 是因为在 Docker 容器内通常直接装在系统环境即可，无需再套一层虚拟环境
-RUN uv pip install torch torchvision \
+# 1. 核心大招：先用 pip 把 CPU 版 torch 系列装好
+# 这一步会下载大约 150MB-200MB，绝对不会带出 nvidia 包
+RUN pip install torch torchvision torchaudio \
     --index-url https://download.pytorch.org/whl/cpu \
-    --system
+    --no-cache-dir
 
-# 2. 复制配置文件
+# 2. 复制你的配置文件
 COPY pyproject.toml ./
 
-# 3. 同步其他依赖
-# 同样加上 --system，这样它会发现系统里已经有 torch 了
-RUN uv sync --system --index-url https://mirrors.aliyun.com/pypi/simple/
+# 3. 关键：用 pip 安装剩下的依赖
+# --no-deps 是终极手段：如果安装某个库（如 sentence-transformers）
+# 报错说缺依赖，我们就手动补。如果它想自动装 torch-cuda，
+# 因为我们第一步已经装了 torch，pip 通常会直接跳过。
+RUN pip install . -i https://mirrors.aliyun.com/pypi/simple/ --no-cache-dir
 
+# 4. 复制代码
 COPY . .
 
 CMD ["python", "main.py"]
