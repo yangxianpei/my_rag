@@ -1,15 +1,22 @@
-FROM python:3.13-slim
+# 使用轻量 Python 镜像
+FROM python
 
 WORKDIR /app
 
+# 先复制依赖文件，利用缓存
+COPY pyproject.toml uv.lock* /app/
+
 # 安装 uv
-RUN pip install uv -i https://mirrors.aliyun.com/pypi/simple/
+RUN pip install --no-cache-dir uv
 
-# 只要 pyproject.toml
-COPY pyproject.toml ./
+# 安装依赖
+RUN uv sync --frozen --index-url https://mirrors.aliyun.com/pypi/simple/
 
-# 同步依赖：只需指定一个主镜像加速普通的包，torch 的逻辑交给 toml
-RUN uv sync --index-url https://mirrors.aliyun.com/pypi/simple/
+# 再复制代码
+COPY . /app
 
-COPY . .
-CMD ["python", "main.py"]
+# 设置默认环境变量为 dev，可在启动时覆盖
+ENV ENV=dev
+
+# 使用 uvicorn 运行
+CMD ["uv", "run", "main.py"]
