@@ -1,21 +1,24 @@
-# 1. 使用 slim 镜像
 FROM python:3.13-slim
 
 WORKDIR /app
 
-# 2. 不从 GitHub 复制 uv，直接通过国内镜像安装 uv
+# 1️⃣ 安装 uv（继续用国内镜像，快）
 RUN pip install uv -i https://mirrors.aliyun.com/pypi/simple/
 
-# 3. 复制依赖文件
+# 2️⃣ 复制依赖文件
 COPY pyproject.toml uv.lock* ./
 
-# 4. 同步依赖（如果你不需要 GPU，这里一定要加 --extra-index-url）
-# 这步如果也慢，是因为在下载 torch 等大包，阿里云镜像会快很多
-RUN uv sync  \
+# 3️⃣ 关键：添加 --index-strategy 参数解决版本冲突
+# 这会强制 uv 在所有源里寻找最合适的 requests 等基础库版本
+RUN uv sync \
     --index-url https://mirrors.aliyun.com/pypi/simple/ \
-    --extra-index-url https://download.pytorch.org/whl/cpu
+    --extra-index-url https://download.pytorch.org/whl/cpu \
+    --index-strategy unsafe-best-match
 
-# 5. 复制代码
+# 4️⃣ 复制代码
 COPY . .
+
+# 告诉项目在运行时也别去找显卡
+ENV CUDA_VISIBLE_DEVICES=""
 
 CMD ["uv", "run", "main.py"]
