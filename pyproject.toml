@@ -25,14 +25,18 @@ dependencies = [
     "sentence-transformers>=5.3.0",
     "sqlalchemy>=2.0.45",
     "urllib3<2",
+    # 补充 PyTorch 依赖（CPU 版本，适配 Windows）
+    "torch>=2.0.0",
+    "torchvision>=0.15.0",
+    "torchaudio>=2.0.0"
 ]
 
 [tool.uv]
-# 告诉 uv，在任何情况下（Linux/Mac/Win）都只考虑这个特定环境
-environments = ["sys_platform == 'linux' and platform_machine == 'x86_64'"]
+# 【关键修改】删除强制 Linux 环境的配置，让 uv 自动适配 Windows 系统
+# 原行已删除：environments = ["sys_platform == 'linux' and platform_machine == 'x86_64'"]
 
 [tool.uv.sources]
-# 指名道姓：只要是 torch，必须从 pytorch-cpu 拿
+# 保留 PyTorch CPU 源配置，确保 Windows 下载 CPU 版本
 torch = { index = "pytorch-cpu" }
 torchvision = { index = "pytorch-cpu" }
 torchaudio = { index = "pytorch-cpu" }
@@ -40,4 +44,4 @@ torchaudio = { index = "pytorch-cpu" }
 [[tool.uv.index]]
 name = "pytorch-cpu"
 url = "https://download.pytorch.org/whl/cpu"
-explicit = true  # 👈 这一行依然是保命的关键
+explicit = true  # 仅 PyTorch 系列包使用该源，避免污染其他依赖
