@@ -30,9 +30,12 @@ dependencies = [
 [[tool.uv.index]]
 name = "pytorch-cpu"
 url = "https://download.pytorch.org/whl/cpu"
-explicit = true  # 👈 关键：这行表示“除非我指定，否则别去这个源找东西”
+explicit = true
 
 [tool.uv.sources]
-# 👈 只有这两个大块头去专门的 CPU 源找，其他库一律走默认镜像
+# 👈 把所有“重型”AI 库及其底层驱动全部锁死在 CPU 源
 torch = { index = "pytorch-cpu" }
 torchvision = { index = "pytorch-cpu" }
+# 如果还有下载，把下面这些也加上（它们是主要的 NVIDIA 依赖来源）
+nvidia-cudnn-cu12 = { index = "pytorch-cpu" }
+nvidia-cublas-cu12 = { index = "pytorch-cpu" }
