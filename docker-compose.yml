@@ -1,5 +1,5 @@
 services:
-  mysql:
+  db:
     image: mysql:8.0
     container_name: rag-db
     restart: always
@@ -17,12 +17,12 @@ services:
     environment:
       - ENV=prod          # 直接写环境变量
     volumes:
-      - /root/llm/all-MiniLM-L6-v2:/all-MiniLM-L6-v2 
-      - /root/llm/ms-marco-MiniLM-L6-v2:/ms-marco-MiniLM-L6-v2
+      - /root/llm/all-MiniLM-L6-v2:/app/models/all-MiniLM-L6-v2
+      - /root/llm/ms-marco-MiniLM-L6-v2:/app/models/ms-marco-MiniLM-L6-v2
     ports:
       - "5000:5000"
     depends_on:
-      - mysql
+      - db
 
 volumes:
   rag_data:
