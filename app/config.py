@@ -2,7 +2,9 @@ import os
 from pathlib import Path
 from dotenv import load_dotenv
 
-load_dotenv()  # 加载环境变量
+env_name = os.getenv("ENV", "dev")  # 默认 dev
+env_file = f".env.{env_name}"
+load_dotenv(env_file)  # 加载环境变量
 
 
 class Config:

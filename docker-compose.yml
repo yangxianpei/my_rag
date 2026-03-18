@@ -1,31 +1,28 @@
 services:
   mysql:
     image: mysql:8.0
-    container_name: rag-mysql
+    container_name: rag-db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: rag
-      MYSQL_PASSWORD: 123456
+      MYSQL_ROOT_PASSWORD: 123456
     ports:
       - "3306:3306"
     volumes:
-      - mysql_data:/var/lib/mysql
+      - volumes:/var/lib/mysql
 
   app:
     build: .
-    container_name: rag-app
+    container_name: rag
     restart: always
-    env_file:
-      - ./env.prod
+    environment:
+      - ENV=prod          # 直接写环境变量
     volumes:
       - /root/llm/all-MiniLM-L6-v2:/all-MiniLM-L6-v2 
       - /root/llm/ms-marco-MiniLM-L6-v2:/ms-marco-MiniLM-L6-v2
-      - /root/my_rag:/app  
     ports:
       - "5000:5000"
     depends_on:
       - mysql
 
 volumes:
-  mysql_data:
+  rag_data:
