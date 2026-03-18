@@ -27,23 +27,15 @@ dependencies = [
     "urllib3<2",
 ]
 
-[tool.uv.sources]
-# 1. 核心：强制 torch 系列走 CPU
-torch = { index = "pytorch-cpu" }
-torchvision = { index = "pytorch-cpu" }
-
-# 2. 关键：把偷偷下载的 NVIDIA 驱动包“拦截”住
-# 只要你的 dependencies 里有 sentence-transformers，就必须加这几行
-nvidia-cuda-runtime-cu12 = { index = "pytorch-cpu" }
-nvidia-cudnn-cu12 = { index = "pytorch-cpu" }
-nvidia-cublas-cu12 = { index = "pytorch-cpu" }
-nvidia-cusolver-cu12 = { index = "pytorch-cpu" }
-nvidia-curand-cu12 = { index = "pytorch-cpu" }
-nvidia-cusparse-cu12 = { index = "pytorch-cpu" }
-nvidia-cuda-cupti-cu12 = { index = "pytorch-cpu" }
-nvidia-nvjitlink-cu12 = { index = "pytorch-cpu" }
-
 [[tool.uv.index]]
 name = "pytorch-cpu"
 url = "https://download.pytorch.org/whl/cpu"
-explicit = true
+explicit = true  # 重点：防止 uv 自动把其他包也去这里找
+
+[tool.uv.sources]
+# 只要是涉及到 AI 推理的包，统统指名道姓锁死到 CPU 源
+torch = { index = "pytorch-cpu" }
+torchvision = { index = "pytorch-cpu" }
+# 关键：手动补齐那些被带进来的 nvidia 包，把它们也定向到 CPU 源（虽然 CPU 源没有，但这样会阻断它去 PyPI 下大的）
+nvidia-cudnn-cu12 = { index = "pytorch-cpu" }
+nvidia-cublas-cu12 = { index = "pytorch-cpu" }
