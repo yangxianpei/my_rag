@@ -1,20 +1,25 @@
-# 使用官方 Python
-FROM python:3.13
+FROM python:3.13-slim
 
-# 设置工作目录
 WORKDIR /app
 
-# 复制项目文件（你的代码 + uv 配置 + requirements 或 pyproject.toml）
+# 基础优化
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
+# 👉 先复制依赖文件（关键）
+COPY pyproject.toml uv.lock* /app/
+
+# 安装 uv
+RUN pip install --no-cache-dir uv
+
+# 👉 安装依赖（这一层会缓存）
+RUN uv sync --frozen \
+    --index-url https://mirrors.aliyun.com/pypi/simple/
+
+# 👉 再复制代码（不会影响依赖缓存）
 COPY . /app
 
-# 安装 uv（你的本地 uv 工具）
-RUN pip install uv
-
-# 使用 uv sync 安装依赖
-
-RUN uv sync --index-url https://mirrors.aliyun.com/pypi/simple/ --trusted-host mirrors.aliyun.com
-# 设置默认环境变量文件（可选）
+# 环境变量
 ENV ENV_FILE=.env.prod
 
-# 容器启动命令
 CMD ["uv", "run", "main.py"]
