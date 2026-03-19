@@ -4,10 +4,15 @@ FROM python:3.13-slim
 
 
 
+
+
 WORKDIR /app
 
 # 仅复制项目代码，不安装任何依赖
 COPY . /app
 
+# 安装 uv
+RUN pip install --no-cache-dir uv
+
 # 调用宿主机映射的 .venv 里的 uv 启动程序
-CMD ["/app/.venv/bin/uv", "run", "main.py"]
+CMD ["uv", "run", "main.py"]
