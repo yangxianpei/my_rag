@@ -2,10 +2,7 @@
 # 若仍拉取失败，换成方案2的 python:3.12-slim（兼容性更好）
 FROM python:3.13-slim
 
-# 可选：手动配置国内镜像源（解决依赖拉取问题，即使我们不用，也避免基础镜像问题）
-RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list && \
-    apt update && apt install -y --no-install-recommends gcc && \
-    rm -rf /var/lib/apt/lists/*
+
 
 WORKDIR /app
 
