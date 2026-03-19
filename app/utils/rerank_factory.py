@@ -14,9 +14,7 @@ class BaseReranker:
 
 class LocalReranker(BaseReranker):
     def __init__(self):
-        self.reranker = CrossEncoder(
-            model_name_or_path="/app/llm/ms-marco-MiniLM-L6-v2"
-        )
+        self.reranker = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
 
     def rerank(self, query, documents, top_k):
         if not documents:
