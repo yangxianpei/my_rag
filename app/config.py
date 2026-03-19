@@ -1,13 +1,11 @@
 import os
 from pathlib import Path
 from dotenv import load_dotenv
-from app.utils.logger import get_logger
 
-logger = get_logger(__name__)
 env_name = os.getenv("ENV", "dev")  # 默认 dev
 env_file = f".env.{env_name}"
 load_dotenv(env_file)  # 加载环境变量
-logger.info(f"当前的环境变量是:{env_file}")
+print(f"当前的环境变量是:{env_file}")
 
 
 class Config:
