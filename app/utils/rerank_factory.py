@@ -3,7 +3,7 @@ from sentence_transformers import CrossEncoder
 from langchain_core.documents import Document
 from app.config import Config
 
-RERANK_MODEL_NAME = "/app/llm/ms-marco-MiniLM-L6-v2"
+RERANK_MODEL_NAME = Config.RERANK_MODEL_NAME
 logger = get_logger(__name__)
 
 
@@ -14,7 +14,9 @@ class BaseReranker:
 
 class LocalReranker(BaseReranker):
     def __init__(self):
-        self.reranker = CrossEncoder(RERANK_MODEL_NAME)
+        self.reranker = CrossEncoder(
+            model_name_or_path="/app/llm/ms-marco-MiniLM-L6-v2"
+        )
 
     def rerank(self, query, documents, top_k):
         if not documents:
