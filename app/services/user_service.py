@@ -11,6 +11,9 @@ class UserService(BaseService[User]):
     def register(self, username, password, email):
         with self.transaction() as session:
             existing_user = session.query(User).filter_by(username=username).first()
+            existing_email = session.query(User).filter_by(email=email).first()
+            if existing_email:
+                raise ValueError("邮箱已经被占用")
             if existing_user:
                 raise ValueError("用户名已经被占用")
             password_hash = self.hash_password(password)

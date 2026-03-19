@@ -3,7 +3,7 @@ from sentence_transformers import CrossEncoder
 from langchain_core.documents import Document
 from app.config import Config
 
-RERANK_MODEL_NAME = "/app/llm/ms-marco-MiniLM-L6-v2"
+RERANK_MODEL_NAME = Config.RERANK_MODEL_NAME
 logger = get_logger(__name__)
 
 

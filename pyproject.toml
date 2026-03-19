@@ -28,7 +28,8 @@ dependencies = [
     # 补充 PyTorch 依赖（CPU 版本，适配 Windows）
     "torch>=2.0.0",
     "torchvision>=0.15.0",
-    "torchaudio>=2.0.0"
+    "torchaudio>=2.0.0",
+    "cryptography>=46.0.5",
 ]
 
 [tool.uv]

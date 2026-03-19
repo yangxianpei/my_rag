@@ -10,6 +10,7 @@ from flask import (
 )
 from app.services.user_service import user_service
 
+
 bp = Blueprint("auth", __name__)
 from app.utils.logger import get_logger
 
@@ -45,7 +46,7 @@ def register():
             flash(str(e), "error")
         except Exception as e:
             logger.error(f"注册失败:{str(e)}")
-            flash("注册失败,请稍后重试", "error")
+            flash("注册失败,请稍后重试", {str(e)})
 
     return render_template("register.html")
 
