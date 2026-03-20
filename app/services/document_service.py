@@ -190,24 +190,24 @@ class Document_service(BaseService[DocumentModel]):
                     },
                 )
                 documents.append(doc_obj)
-                # 提取所有分块的ID，用于向量存储 chunk["id"]=它对就应的文档ID_index索引
-                chunk_ids = [chunk["id"] for chunk in chunks]
-                # 调用向量服务，将分块后的文档对象写入向量数据库
-                vector_service.add_documents(
-                    collection_name=collection_name,
-                    documents=documents,
-                    ids=chunk_ids,
-                    user_id=user_id,
+            # 提取所有分块的ID，用于向量存储 chunk["id"]=它对就应的文档ID_index索引
+            chunk_ids = [chunk["id"] for chunk in chunks]
+            # 调用向量服务，将分块后的文档对象写入向量数据库
+            vector_service.add_documents(
+                collection_name=collection_name,
+                documents=documents,
+                ids=chunk_ids,
+                user_id=user_id,
+            )
+            with self.transaction() as session:
+                doc = (
+                    session.query(DocumentModel)
+                    .filter(DocumentModel.id == doc_id)
+                    .first()
                 )
-                with self.transaction() as session:
-                    doc = (
-                        session.query(DocumentModel)
-                        .filter(DocumentModel.id == doc_id)
-                        .first()
-                    )
-                    if doc:
-                        doc.status = "completed"
-                        doc.chunk_count = len(chunks)
+                if doc:
+                    doc.status = "completed"
+                    doc.chunk_count = len(chunks)
                 self.logger.info(f"文档{doc_id}处理完成,分块数量为{len(chunks)}")
         except Exception as e:
             # 如果文档处理了，则需要更新文档的状态为失败，并且记录错误信息
