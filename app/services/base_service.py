@@ -1,6 +1,6 @@
+import logging
 from app.utils.db import db_transaction, db_session
 from typing import Optional, TypeVar, Generic
-
 
 from app.utils.logger import get_logger
 
@@ -13,7 +13,7 @@ T = TypeVar("T")
 # 定义基础服务器，支持泛型
 class BaseService(Generic[T]):
     def __init__(self):
-        self.logger = get_logger(self.__class__.__name__)
+        self.logger: logging.Logger = get_logger(self.__class__.__name__)
 
     def session(self):
         return db_session()
