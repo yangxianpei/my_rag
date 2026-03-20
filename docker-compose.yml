@@ -25,6 +25,7 @@ services:
   app:
     build: .
     container_name: rag
+    restart: always
     environment:
       - ENV=prod          # 保留原有环境变量
       # 新增：给应用容器也同步时区（避免应用和数据库时间不一致）

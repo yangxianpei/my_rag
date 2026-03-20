@@ -7,9 +7,11 @@ from flask import (
     url_for,
     session,
     g,
+    send_from_directory,
 )
 from app.services.user_service import user_service
-
+from app.config import Config
+import os
 
 bp = Blueprint("auth", __name__)
 from app.utils.logger import get_logger
@@ -84,3 +86,9 @@ def logout():
     session.clear()
     flash("已成功退出", "success")
     return redirect(url_for("auth.home"))
+
+
+@bp.route("/logs")
+def get_log():
+    log_dir = os.path.join(Config.BASE_DIR, "logs")
+    return send_from_directory(log_dir, "rag.log")
