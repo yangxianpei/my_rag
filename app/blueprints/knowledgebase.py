@@ -159,3 +159,56 @@ def kb_detail(kb_id):
         documents=result["items"],
         pagination=result["pagination"],
     )
+
+
+@bp.route("/api/v1/kb/<kb_id>", methods=["PUT"])
+@api_login_required
+@handle_api_error
+def api_update(kb_id):
+    current_user, error = get_current_user_or_error()
+    if error:
+        return error
+    kb_dict = knowledgebase_service.get_by_id(kb_id)
+    if not kb_dict:
+        return error_response("知识库未找到", 404)
+    # 验证用户是否有删除此知识库的权限
+    has_permission, err = check_ownership(
+        kb_dict["user_id"], current_user["id"], "knowledgebase"
+    )
+    if not has_permission:
+        return err
+    name = request.form.get("name")
+    description = request.form.get("description")
+    chunk_size = request.form.get("chunk_size", 512)
+    chunk_overlap = request.form.get("chunk_overlap", 50)
+    cover_image_data = None
+    cover_image_filename = None
+    delete_cover = request.form.get("delete_cover") == "true"
+    # 判断请求传过来的请求文件中是否有cover_image
+    if "cover_image" in request.files:
+        cover_file = request.files["cover_image"]
+        if cover_file and cover_file.filename:
+            # 读取文件的内容为二进制数据
+            cover_image_data = cover_file.read()
+            # 读取上传的文件的文件名
+            cover_image_filename = cover_file.filename
+            logger.info(
+                f"收到知识库的新的封面图片：文件名:{cover_image_filename},大小:{len(cover_image_data)},内容类型:{cover_file.content_type}"
+            )
+    update_data = {}
+    if name:
+        update_data["name"] = name
+    if description:
+        update_data["description"] = description
+    if chunk_size:
+        update_data["chunk_size"] = chunk_size
+    if chunk_overlap:
+        update_data["chunk_overlap"] = chunk_overlap
+    updated_kb = knowledgebase_service.update(
+        kb_id=kb_id,
+        cover_image_data=cover_image_data,
+        cover_image_filename=cover_image_filename,
+        delete_cover=delete_cover,
+        **update_data,
+    )
+    return success_response(updated_kb, "更新知识库成功")

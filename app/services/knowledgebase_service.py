@@ -179,5 +179,42 @@ class Knowledgebase_service(BaseService[Knowledgebase]):
                 self.logger.error("获取ID对应的对象失败:{e}")
                 return None
 
+    def update(
+        self, kb_id, cover_image_data, cover_image_filename, delete_cover, **kwargs
+    ):
+        with self.transaction() as session:
+            kb = session.query(Knowledgebase).filter(Knowledgebase.id == kb_id).first()
+            if not kb:
+                return None
+            # 老的图片路径
+            old_cover_path = kb.cover_image if kb.cover_image else None
+            if delete_cover:
+                if old_cover_path:
+                    # 如果有旧的封面图片，并且需要删除的话
+                    storage_service.delete_file(old_cover_path)
+                    self.logger.info(f"已成功删除旧的封面图片:{old_cover_path}")
+                    # 更新数据库中的cover_image为None
+                    setattr(kb, "cover_image", None)
+            elif cover_image_data and cover_image_filename:
+                file_ext_with_dot = os.path.splitext(cover_image_filename)[1]
+                file_ext_with_dot = file_ext_with_dot.lower()
+                # 构建新的图片路径
+                new_cover_path = f"covers/{kb_id}{file_ext_with_dot}"
+                if old_cover_path:
+                    storage_service.delete_file(old_cover_path)
+                storage_service.upload_file(new_cover_path, cover_image_data)
+                setattr(kb, "cover_image", new_cover_path)
+
+            for key, value in kwargs.items():
+                if hasattr(kb, key) and value is not None:
+                    setattr(kb, key, value)
+            # flush指是使用我们提供的kb的值去更新数据库
+            session.flush()
+            # 刷新对象，避免未提交前读到旧的数据
+            session.refresh(kb)
+            kb_dict = kb.to_dict()
+            self.logger.info(f"更新知识库:{kb_id} {kb.name}")
+            return kb_dict
+
 
 knowledgebase_service = Knowledgebase_service()

@@ -5,56 +5,59 @@
 {% block content %}
 <div class="row">
     <div class="col-12">
-        <nav aria-label="breadcrumb" class="mb-3">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/">首页</a></li>
+        <nav aria-label="breadcrumb" class="mb-4">
+            <ol class="breadcrumb bg-white rounded-lg p-3 shadow-sm">
+                <li class="breadcrumb-item"><a href="/" class="text-primary">首页</a></li>
                 <li class="breadcrumb-item active">设置</li>
             </ol>
         </nav>
 
-        <h2><i class="bi bi-gear"></i> 系统设置</h2>
-        <p class="text-muted">配置模型、提示词和检索参数</p>
+        <div class="mb-6">
+            <h2 class="text-primary font-weight-bold"><i class="bi bi-gear me-2"></i> 系统设置</h2>
+            <p class="text-muted">配置模型、提示词和检索参数</p>
+        </div>
 
-        <div style="height: calc(100% - 75px); overflow-y: auto;">
+        <div class="mb-6">
             <form id="settingsForm" onsubmit="saveSettings(event)">
                 <!-- 标签页导航 -->
-                <ul class="nav nav-tabs mb-4" id="settingsTabs" role="tablist">
+                <ul class="nav nav-tabs" id="settingsTabs" role="tablist">
                     <li class="nav-item" role="presentation">
                         <button class="nav-link active" id="embedding-tab" data-bs-toggle="tab"
                             data-bs-target="#embedding" type="button" role="tab">
-                            <i class="bi bi-diagram-3"></i> 向量嵌入模型
+                            <i class="bi bi-diagram-3 me-2"></i> 向量嵌入模型
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="llm-tab" data-bs-toggle="tab" data-bs-target="#llm" type="button"
                             role="tab">
-                            <i class="bi bi-robot"></i> 大语言模型
+                            <i class="bi bi-robot me-2"></i> 大语言模型
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="prompt-tab" data-bs-toggle="tab" data-bs-target="#prompt"
                             type="button" role="tab">
-                            <i class="bi bi-chat-quote"></i> 提示词设置
+                            <i class="bi bi-chat-quote me-2"></i> 提示词设置
                         </button>
                     </li>
                     <li class="nav-item" role="presentation">
                         <button class="nav-link" id="retrieval-tab" data-bs-toggle="tab" data-bs-target="#retrieval"
                             type="button" role="tab">
-                            <i class="bi bi-search"></i> 检索设置
+                            <i class="bi bi-search me-2"></i> 检索设置
                         </button>
                     </li>
                 </ul>
 
                 <!-- 标签页内容 -->
-                <div class="tab-content" id="settingsTabContent">
+                <div class="tab-content mt-4" id="settingsTabContent">
                     <!-- 标签1: 向量嵌入模型 -->
                     <div class="tab-pane fade show active" id="embedding" role="tabpanel">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="mb-0"><i class="bi bi-diagram-3"></i> 向量嵌入模型（Embedding）</h5>
+                                <h5 class="mb-0 font-weight-bold"><i class="bi bi-diagram-3 me-2"></i> 向量嵌入模型（Embedding）
+                                </h5>
                             </div>
                             <div class="card-body">
-                                <div class="mb-3">
+                                <div class="mb-4">
                                     <label class="form-label">提供商 <span class="text-danger">*</span></label>
                                     <select class="form-select" id="embeddingProvider" name="embedding_provider"
                                         onchange="updateEmbeddingForm()" required>
@@ -65,7 +68,7 @@
                                     <div class="form-text">选择向量嵌入模型提供商</div>
                                 </div>
 
-                                <div class="mb-3" id="embeddingModelNameGroup">
+                                <div class="mb-4" id="embeddingModelNameGroup">
                                     <label class="form-label">模型名称</label>
                                     <select class="form-select" id="embeddingModelName" name="embedding_model_name">
                                         <option value="">请选择模型</option>
@@ -74,14 +77,14 @@
                                     <div class="form-text">选择模型名称或路径</div>
                                 </div>
 
-                                <div class="mb-3" id="embeddingApiKeyGroup" style="display: none;">
+                                <div class="mb-4" id="embeddingApiKeyGroup" style="display: none;">
                                     <label class="form-label">API Key</label>
                                     <input type="password" class="form-control" id="embeddingApiKey"
                                         name="embedding_api_key" placeholder="输入 API Key">
                                     <div class="form-text">某些提供商需要 API Key</div>
                                 </div>
 
-                                <div class="mb-3" id="embeddingBaseUrlGroup" style="display: none;">
+                                <div class="mb-4" id="embeddingBaseUrlGroup" style="display: none;">
                                     <label class="form-label">Base URL</label>
                                     <input type="text" class="form-control" id="embeddingBaseUrl"
                                         name="embedding_base_url" placeholder="例如: http://localhost:11434">
@@ -95,10 +98,10 @@
                     <div class="tab-pane fade" id="llm" role="tabpanel">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="mb-0"><i class="bi bi-robot"></i> 大语言模型（LLM）</h5>
+                                <h5 class="mb-0 font-weight-bold"><i class="bi bi-robot me-2"></i> 大语言模型（LLM）</h5>
                             </div>
                             <div class="card-body">
-                                <div class="mb-3">
+                                <div class="mb-4">
                                     <label class="form-label">提供商 <span class="text-danger">*</span></label>
                                     <select class="form-select" id="llmProvider" name="llm_provider"
                                         onchange="updateLLMForm()" required>
@@ -109,7 +112,7 @@
                                     <div class="form-text">选择大语言模型提供商</div>
                                 </div>
 
-                                <div class="mb-3" id="llmModelNameGroup">
+                                <div class="mb-4" id="llmModelNameGroup">
                                     <label class="form-label">模型名称</label>
                                     <select class="form-select" id="llmModelName" name="llm_model_name">
                                         <option value="1" selected>请选择模型</option>
@@ -118,21 +121,21 @@
                                     <div class="form-text">选择模型名称</div>
                                 </div>
 
-                                <div class="mb-3" id="llmApiKeyGroup">
+                                <div class="mb-4" id="llmApiKeyGroup">
                                     <label class="form-label">API Key</label>
                                     <input type="password" class="form-control" id="llmApiKey" name="llm_api_key"
                                         placeholder="输入 API Key">
                                     <div class="form-text">某些提供商需要 API Key</div>
                                 </div>
 
-                                <div class="mb-3" id="llmBaseUrlGroup">
+                                <div class="mb-4" id="llmBaseUrlGroup">
                                     <label class="form-label">Base URL</label>
                                     <input type="text" class="form-control" id="llmBaseUrl" name="llm_base_url"
                                         placeholder="例如: https://api.deepseek.com">
                                     <div class="form-text">API Base URL</div>
                                 </div>
 
-                                <div class="mb-3">
+                                <div class="mb-4">
                                     <label class="form-label">温度 (Temperature)</label>
                                     <input type="number" class="form-control" id="llmTemperature" name="llm_temperature"
                                         value="0.7" step="0.1" min="0" max="2" placeholder="0.7">
@@ -145,25 +148,28 @@
                     <!-- 标签3: 提示词设置 -->
                     <div class="tab-pane fade" id="prompt" role="tabpanel">
                         <div class="card">
+                            <div class="card-header">
+                                <h5 class="mb-0 font-weight-bold"><i class="bi bi-chat-quote me-2"></i> 提示词设置</h5>
+                            </div>
                             <div class="card-body">
                                 <!-- 子标签页导航 -->
-                                <ul class="nav nav-tabs mb-4" id="promptSubTabs" role="tablist">
+                                <ul class="nav nav-tabs" id="promptSubTabs" role="tablist">
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link active" id="chat-prompt-sub-tab" data-bs-toggle="tab"
                                             data-bs-target="#chat-prompt-sub" type="button" role="tab">
-                                            <i class="bi bi-chat"></i> 普通聊天提示词
+                                            <i class="bi bi-chat me-2"></i> 普通聊天提示词
                                         </button>
                                     </li>
                                     <li class="nav-item" role="presentation">
                                         <button class="nav-link" id="rag-prompt-sub-tab" data-bs-toggle="tab"
                                             data-bs-target="#rag-prompt-sub" type="button" role="tab">
-                                            <i class="bi bi-book"></i> 知识库聊天提示词
+                                            <i class="bi bi-book me-2"></i> 知识库聊天提示词
                                         </button>
                                     </li>
                                 </ul>
 
                                 <!-- 子标签页内容 -->
-                                <div class="tab-content" id="promptSubTabContent">
+                                <div class="tab-content mt-4" id="promptSubTabContent">
                                     <!-- 子标签1: 普通聊天提示词 -->
                                     <div class="tab-pane fade show active" id="chat-prompt-sub" role="tabpanel">
                                         <div class="mb-4">
@@ -193,7 +199,7 @@
 
                                         <hr class="my-4">
 
-                                        <div class="mb-3">
+                                        <div class="mb-4">
                                             <label class="form-label">知识库聊天查询提示词</label>
                                             <textarea class="form-control" id="ragQueryPrompt" name="rag_query_prompt"
                                                 rows="10"
@@ -217,10 +223,10 @@
                     <div class="tab-pane fade" id="retrieval" role="tabpanel">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="mb-0"><i class="bi bi-search"></i> 检索设置</h5>
+                                <h5 class="mb-0 font-weight-bold"><i class="bi bi-search me-2"></i> 检索设置</h5>
                             </div>
                             <div class="card-body">
-                                <div class="mb-3">
+                                <div class="mb-4">
                                     <label class="form-label">检索模式 <span class="text-danger">*</span></label>
                                     <select class="form-select" id="retrievalMode" name="retrieval_mode"
                                         onchange="updateRetrievalForm()" required>
@@ -231,7 +237,7 @@
                                     <div class="form-text">选择文档检索方式</div>
                                 </div>
 
-                                <div class="mb-3" id="vectorThresholdGroup">
+                                <div class="mb-4" id="vectorThresholdGroup">
                                     <label class="form-label">向量检索阈值</label>
                                     <input type="number" class="form-control" id="vectorThreshold"
                                         name="vector_threshold" value="0.2" step="0.1" min="0" max="1"
@@ -239,7 +245,7 @@
                                     <div class="form-text">向量相似度阈值，低于此值的文档将被过滤（0-1）</div>
                                 </div>
 
-                                <div class="mb-3" id="keywordThresholdGroup" style="display: none;">
+                                <div class="mb-4" id="keywordThresholdGroup" style="display: none;">
                                     <label class="form-label">全文检索阈值</label>
                                     <input type="number" class="form-control" id="keywordThreshold"
                                         name="keyword_threshold" value="0.5" step="0.1" min="0" max="1"
@@ -247,22 +253,22 @@
                                     <div class="form-text">关键词匹配阈值（0-1）</div>
                                 </div>
 
-                                <div class="mb-3" id="vectorWeightGroup" style="display: none;">
+                                <div class="mb-4" id="vectorWeightGroup" style="display: none;">
                                     <label class="form-label">向量检索权重</label>
                                     <input type="number" class="form-control" id="vectorWeight" name="vector_weight"
                                         value="0.7" step="0.1" min="0" max="1" placeholder="0.7">
                                     <div class="form-text">混合检索时向量检索的权重（0-1），关键词检索权重 = 1 - 向量权重</div>
                                 </div>
 
-                                <div class="mb-3">
+                                <div class="mb-4">
                                     <label class="form-label">TopK 结果数量</label>
                                     <input type="number" class="form-control" id="topK" name="top_k" value="5" min="1"
                                         max="50" placeholder="5">
                                     <div class="form-text">返回的文档数量（1-50）</div>
                                 </div>
 
-                                <div class="alert alert-info">
-                                    <i class="bi bi-info-circle"></i> <strong>说明：</strong>
+                                <div class="alert alert-info rounded-lg shadow-sm">
+                                    <i class="bi bi-info-circle me-2"></i> <strong>说明：</strong>
                                     <ul class="mb-0 mt-2">
                                         <li><strong>向量检索：</strong>基于语义相似度检索，适合理解问题意图</li>
                                         <li><strong>全文检索：</strong>基于关键词匹配检索，适合精确匹配</li>
@@ -274,10 +280,12 @@
                     </div>
                 </div>
 
-                <div class="d-flex justify-content-end gap-2 mt-4">
-                    <button type="button" class="btn btn-secondary" onclick="resetSettings()">重置</button>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="bi bi-save"></i> 保存设置
+                <div class="d-flex justify-content-end gap-3 mt-6">
+                    <button type="button" class="btn btn-secondary rounded-lg px-4" onclick="resetSettings()">
+                        <i class="bi bi-arrow-counterclockwise me-2"></i> 重置
+                    </button>
+                    <button type="submit" class="btn btn-primary rounded-lg px-4">
+                        <i class="bi bi-save me-2"></i> 保存设置
                     </button>
                 </div>
             </form>
