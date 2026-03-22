@@ -4,7 +4,7 @@ services:
     container_name: rag-db
     restart: always
     environment:
-      MYSQL_ROOT_PASSWORD: yxp112112
+      MYSQL_ROOT_PASSWORD: 789456112
       # 新增：设置容器和MySQL时区为东八区
       TZ: Asia/Shanghai
       MYSQL_INITDB_SKIP_TZINFO: 1
