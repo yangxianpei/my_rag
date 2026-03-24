@@ -161,6 +161,7 @@ class RetrievalService:
         # 初始化结果列表
         docs_with_scores = []
         # 遍历候选索引列表
+        print("aaaaa", keyword_threshold)
         for idx in top_incices:
             normalized_score = float(normalized_scores[idx])
             normalized_score = max(0.0, min(1.0, normalized_score))
