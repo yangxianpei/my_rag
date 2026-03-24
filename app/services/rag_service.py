@@ -30,14 +30,14 @@ class RAGService:
             docs = retrieval_service.vector_search(
                 collection_name=collection_name,
                 query=question,
-                # rerank=False,
+                rerank=False,
                 user_id=user_id,
             )
         elif retrieval_mode == "keyword":
             docs = retrieval_service.keyword_search(
                 collection_name=collection_name,
                 query=question,
-                # rerank=False,
+                rerank=False,
                 user_id=user_id,
             )
         elif retrieval_mode == "hybrid":
@@ -63,10 +63,11 @@ class RAGService:
         filtered_docs = self._retrieve_documents(kb_id, question, user_id)
         context = "\n\n".join(
             [
-                f"文档{i+1} ({doc.metadata.get('doc_name','未知文档')}):\n{doc.page_content}"
+                f"({doc.metadata.get('doc_name','未知文档')}):\n{doc.page_content}"
                 for i, doc in enumerate(filtered_docs)
             ]
         )
+        context += "\n\n 根据以上信息，重新组织一下语言再回答用户的问题。"
         for chunk in chain.stream({"context": context, "question": question}):
             content = chunk.content
             if content:
