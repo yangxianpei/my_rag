@@ -304,7 +304,6 @@
         const apiKeyGroup = document.getElementById('embeddingApiKeyGroup')
         const baseUrlGroup = document.getElementById('embeddingBaseUrlGroup')
         //先记住当前选中的模型
-        debugger
         const currentValue = modelSelect.value
         modelSelect.innerHTML = '<option value="">请选择模型</options>'
         if (availableModels && availableModels.embedding_models[provider]) {
@@ -409,7 +408,6 @@
                 updateEmbeddingForm()
                 updateLLMForm()
                 updateRetrievalForm()
-                debugger
                 const settingsResponse = await fetch('/api/v1/settings')
                 const settingsResult = await settingsResponse.json()
                 if (settingsResult.code == 200) {
@@ -430,7 +428,7 @@
                 embedding_base_url: 'embedding_base_url',
                 llm_provider: 'deepseek',
                 llm_model_name: 'deepseek-chat',
-                llm_api_key: 'deepseek_api_key',
+                llm_api_key: 'sk-71998f076ef040ef91cd6b4dcd872b70',
                 llm_base_url: 'https://api.deepseek.com',
                 llm_temperature: 0.7,
                 chat_system_prompt: '你是一个专业的AI助手。请友好、准确地回答用户的问题。',

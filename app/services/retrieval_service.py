@@ -17,6 +17,7 @@ class RetrievalService:
         self.reranker = RerankFactory.create_reranker(self.settings)
 
     def vector_search(self, collection_name, query, user_id, rerank=True):
+        self.settings = settings_service.get(user_id)
         vector_store = vector_service.get_or_create_collection(collection_name, user_id)
         top_k = int(self.settings.get("top_k", "5"))
         vector_threshold = float(self.settings.get("vector_threshold", "0.1"))
@@ -106,8 +107,10 @@ class RetrievalService:
         ]
         return tokens
 
-    def keyword_search(self, collection_name, query, rerank=True):
-        vector_store = vector_service.get_or_create_collection(collection_name)
+    def keyword_search(self, collection_name, query, user_id, rerank=True):
+        vector_store = vector_service.get_or_create_collection(
+            collection_name, user_id=user_id
+        )
         # 从底层的集合中获取所有的内容
         # 这一步是 获取集合所有文档块，组合成 langchain Document的格式吗
         results = vector_store._collection.get(

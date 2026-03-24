@@ -18,6 +18,33 @@
             padding: 0;
         }
 
+        .myfade {
+            animation: fadeOut 0.5s forwards;
+            z-index: 99;
+            float: right;
+            position: absolute;
+            right: 6px;
+            top: 59px;
+            width: 200px;
+            display: flex;
+            justify-content: center;
+        }
+
+        @keyframes fadeOut {
+            from {
+                display: block;
+            }
+
+            to {
+                display: none;
+            }
+        }
+
+        .home_alert {
+            position: fixed;
+            z-index: 99;
+        }
+
         body {
             background-color: #f8f9fa;
 
@@ -249,13 +276,13 @@
 
     <!-- 主要内容 -->
     <div class="container-fluid mt-4 main">
-        <!-- Flash 消息 -->
+
         {% with messages = get_flashed_messages(with_categories=true) %}
         {% if messages %}
         <div class="mb-3">
             {% for category, message in messages %}
-            <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade show"
-                role="alert">
+            <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} alert-dismissible fade myfade show home_alert"
+                role=" alert">
                 {{ message }}
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>

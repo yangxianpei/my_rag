@@ -30,14 +30,14 @@ class RAGService:
             docs = retrieval_service.vector_search(
                 collection_name=collection_name,
                 query=question,
-                rerank=False,
+                # rerank=False,
                 user_id=user_id,
             )
         elif retrieval_mode == "keyword":
             docs = retrieval_service.keyword_search(
                 collection_name=collection_name,
                 query=question,
-                rerank=False,
+                # rerank=False,
                 user_id=user_id,
             )
         elif retrieval_mode == "hybrid":

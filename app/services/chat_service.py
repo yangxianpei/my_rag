@@ -3,6 +3,7 @@ from app.utils.llm_factory import LLMFactory
 from langchain_core.prompts import ChatPromptTemplate
 from app.utils.logger import get_logger
 from app.services.rag_service import rag_service
+import traceback
 
 logger = get_logger(__name__)
 
@@ -34,7 +35,7 @@ class ChatService:
                     full_answer += content
                     yield {"type": "content", "content": content}
         except Exception as e:
-            logger.error(f"流式生成时出错:{e}")
+            logger.error(f"流式生成时出错:{e}\n {traceback.format_exc()}")
             yield {"type": "error", "content": f"流式生成时出错:{e}"}
             return
         yield {"type": "done", "content": "", "metadata": {"question": question}}

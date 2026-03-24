@@ -32,7 +32,7 @@ class SettingsService(BaseService[Settings]):
             "chat_system_prompt": "你是一个专业的AI助手。请友好、准确地回答用户的问题。",  # 聊天系统默认提示词
             "rag_system_prompt": "你是一个专业的AI助手。请基于文档内容回答问题。",  # RAG系统提示词
             "rag_query_prompt": "文档内容：\n{context}\n\n问题：{question}\n\n请基于文档内容回答问题。如果文档中没有相关信息，请明确说明。",  # RAG查询提示词
-            "retrieval_mode": "vector",  # 默认检索模式
+            "retrieval_mode": "keyword",  # 默认检索模式
             "vector_threshold": 0.2,  # 向量检索阈值
             "keyword_threshold": 0.0,  # 关键词检索阈值
             "vector_weight": 0.7,  # 检索混合权重

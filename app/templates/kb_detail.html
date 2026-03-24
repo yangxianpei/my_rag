@@ -243,7 +243,6 @@
         }
     }
     async function processDoc(docId, docName) {
-        debugger
         try {
             const response = await fetch(`/api/v1/documents/${docId}/process`, { method: "POST" })
             if (response.ok) {

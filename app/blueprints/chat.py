@@ -28,6 +28,7 @@ from app.utils.logger import get_logger
 
 logger = get_logger(__name__)
 import time
+import traceback
 
 
 @bp.route("/chat")
@@ -132,7 +133,7 @@ def common_chat():
             if full_answer:
                 session_service.add_message(session_id, "assistant", full_answer)
         except Exception as e:
-            logger.error(f"流式输出出错:{e}")
+            logger.error(f"流式输出出错:{e} {traceback.format_exc()}")
             error_chunk = {"type": "error", "content": str(e)}
             yield f"data: {json.dumps(error_chunk,ensure_ascii=False)}\n\n"
 
@@ -213,7 +214,7 @@ def rag_chat(kb_id):
                 )
 
         except Exception as e:
-            logger.error(f"流式输出时出错:{e}")
+            logger.error(f"流式输出时出错:{e} {traceback.format_exc()}")
             error_chunk = {"type": "error", "content": str(e)}
             yield f"data: {json.dumps(error_chunk,ensure_ascii=False)}\n\n"
 
