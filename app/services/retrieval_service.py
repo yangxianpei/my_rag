@@ -108,6 +108,7 @@ class RetrievalService:
         return tokens
 
     def keyword_search(self, collection_name, query, user_id, rerank=True):
+        self.settings = settings_service.get(user_id)
         vector_store = vector_service.get_or_create_collection(
             collection_name, user_id=user_id
         )
