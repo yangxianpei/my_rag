@@ -34,8 +34,8 @@ class SettingsService(BaseService[Settings]):
             "rag_query_prompt": "文档内容：\n{context}\n\n问题：{question}\n\n请基于文档内容回答问题。如果文档中没有相关信息，请明确说明。",  # RAG查询提示词
             "retrieval_mode": "keyword",  # 默认检索模式
             "vector_threshold": 0.2,  # 向量检索阈值
-            "keyword_threshold": 0.0,  # 关键词检索阈值
-            "vector_weight": 0.7,  # 检索混合权重
+            "keyword_threshold": 0.5,  # 关键词检索阈值
+            "vector_weight": 0.5,  # 检索混合权重
             "top_k": 5,  # 返回结果数量
         }
 
