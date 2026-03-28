@@ -1,22 +1,25 @@
-# 使用轻量 Python 镜像
-FROM python
+FROM python:3.11-slim
 
 WORKDIR /app
 
-# 先复制依赖文件，利用缓存
-COPY pyproject.toml uv.lock* /app/
+# pip 国内源（给 pip / 构建依赖用）
+ENV PIP_INDEX_URL=https://mirrors.aliyun.com/pypi/simple/
+
+RUN pip install --upgrade pip
 
 # 安装 uv
-RUN pip install --no-cache-dir uv
+RUN pip install uv
 
-# 安装依赖
-RUN uv sync --frozen --index-url https://mirrors.aliyun.com/pypi/simple/
+# uv 国内源（给 uv 用，关键！）
+ENV UV_INDEX_URL=https://mirrors.aliyun.com/pypi/simple/
 
-# 再复制代码
+# 复制依赖文件（利用缓存）
+COPY pyproject.toml /app/
+
+# 安装依赖（锁版本）
+RUN uv sync
+
+# 复制代码
 COPY . /app
 
-# 设置默认环境变量为 dev，可在启动时覆盖
-ENV ENV=dev
-
-# 使用 uvicorn 运行
 CMD ["uv", "run", "main.py"]
