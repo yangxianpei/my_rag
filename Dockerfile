@@ -21,5 +21,7 @@ RUN uv sync
 
 # 复制代码
 COPY . /app
+ENV ENV=prod
+CMD ["uv", "run","main.py"]
 
-CMD ["uv", "run", "main.py"]
+
