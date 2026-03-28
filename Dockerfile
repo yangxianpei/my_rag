@@ -22,4 +22,4 @@ RUN uv sync
 # 复制代码
 COPY . /app
 
-CMD ["uv", "run", "main.py"]
+CMD ["python", "main.py"]
