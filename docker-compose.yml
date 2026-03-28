@@ -31,7 +31,7 @@ services:
       # 新增：给应用容器也同步时区（避免应用和数据库时间不一致）
       - TZ=Asia/Shanghai
     volumes:
-      - /home/ubuntu/my_rag/llm:/app/llm
+      - /home/ubuntu/my_rag:/app
           # 新增：应用容器也挂载时区文件
       - /etc/localtime:/etc/localtime:ro
     ports:
